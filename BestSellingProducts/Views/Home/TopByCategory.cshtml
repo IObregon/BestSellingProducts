@@ -1,0 +1,29 @@
+﻿@model Dictionary<string, List<BestSellingProducts.Models.GetTopFiveEveryCategory_Result>>
+
+@{
+    ViewBag.Title = "Top 5 By Category";
+}
+
+<div class="table-responsive">
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th class="row">Top Five By Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kvp in Model)
+            {
+                <tr class="row">
+                    <td>@kvp.Key</td>
+                </tr>
+                <tr class="row">
+                    @foreach (var value in kvp.Value)
+                    {
+                        <td>@value.ProductName</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
