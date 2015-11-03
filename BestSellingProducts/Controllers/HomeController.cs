@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BestSellingProducts.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +9,24 @@ namespace BestSellingProducts.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly IBestSellingProductsDataSource DataSource;
+
+        public HomeController(IBestSellingProductsDataSource dataSource)
+        {
+            this.DataSource = dataSource;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            return View(DataSource.GetTopTen());
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View(DataSource.GetTopFiveEveryCategory());
         }
 
         public ActionResult Contact()
