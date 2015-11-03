@@ -6,49 +6,62 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BestSellingProducts;
 using BestSellingProducts.Controllers;
+using BestSellingProducts.Core;
+using Moq;
+using BestSellingProducts.Models;
 
 namespace BestSellingProducts.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+        private Mock<IBestSellingProductsDataSource> mockBestSellingProductsDataSource = new Mock<IBestSellingProductsDataSource>();
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            
+            var expect = new List<GetTopTen_Result>(10);
+            mockBestSellingProductsDataSource.Setup(m => m.GetTopTen()).Returns(expect);
+            HomeController controller = new HomeController(mockBestSellingProductsDataSource.Object);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
+
+            var model = result.ViewData.Model as List<GetTopTen_Result>;
+
+            Assert.AreEqual(model.Count, expect.Count);
         }
 
         [TestMethod]
-        public void About()
+        public void TopByCategory()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(mockBestSellingProductsDataSource.Object);
 
             // Act
-            ViewResult result = controller.TopBycategory() as ViewResult;
+            ViewResult result = controller.TopByCategory() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+           
         }
 
         [TestMethod]
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(mockBestSellingProductsDataSource.Object);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
+
+            Assert.AreEqual("Iker Obregon Reigosa", result.ViewBag.Message);
         }
     }
 }

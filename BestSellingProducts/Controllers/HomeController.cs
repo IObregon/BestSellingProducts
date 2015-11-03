@@ -24,7 +24,6 @@ namespace BestSellingProducts.Controllers
 
         public ActionResult TopByCategory()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View(DataSource.GetTopFiveEveryCategory());
         }
