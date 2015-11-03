@@ -28,7 +28,7 @@ namespace BestSellingProducts.Core
             return list;
         }
 
-        public List<GetTopFiveEveryCategory_Result> GetTopFiveEveryCategory()
+        public Dictionary<string, List<GetTopFiveEveryCategory_Result>> GetTopFiveEveryCategory()
         {
             ObjectResult<GetTopFiveEveryCategory_Result> resultList = _context.GetTopFiveEveryCategory();
 
@@ -36,7 +36,9 @@ namespace BestSellingProducts.Core
 
             list = (from a in resultList select a).ToList<GetTopFiveEveryCategory_Result>();
 
-            return list;
+            var map = list.GroupBy(x => x.CategoryName).ToDictionary(x => x.Key, x => x.ToList());
+
+            return map;
         }
     }
 }

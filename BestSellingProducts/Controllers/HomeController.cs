@@ -22,7 +22,7 @@ namespace BestSellingProducts.Controllers
             return View(DataSource.GetTopTen());
         }
 
-        public ActionResult About()
+        public ActionResult TopByCategory()
         {
             ViewBag.Message = "Your application description page.";
 
@@ -31,7 +31,7 @@ namespace BestSellingProducts.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Iker Obregon Reigosa";
 
             return View();
         }

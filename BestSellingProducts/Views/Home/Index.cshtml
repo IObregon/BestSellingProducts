@@ -1,11 +1,28 @@
 ﻿@model IEnumerable<BestSellingProducts.Models.GetTopTen_Result>
-
 @{
-    ViewBag.Title = "About";
+            ViewBag.Title = "Top Ten";
 }
 
-@foreach (var item in Model)
-{
-    <div>@item.ProductName</div>
-    <div>@item.ProductTotal</div>
-}
+<div class="panel panel-default">
+    <table class="table table-striped table-responsive ">
+        <thead>
+            <tr class="row">
+                <th> Product Name </th>
+                <th> Product Total </th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr class="row">
+                    <td>@item.ProductName</td>
+                    <td>@item.ProductTotal</td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>

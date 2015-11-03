@@ -10,6 +10,6 @@ namespace BestSellingProducts.Core
     public interface IBestSellingProductsDataSource
     {
         List<GetTopTen_Result> GetTopTen();
-        List<GetTopFiveEveryCategory_Result> GetTopFiveEveryCategory();
+        Dictionary<string, List<GetTopFiveEveryCategory_Result>> GetTopFiveEveryCategory();
     }
 }
